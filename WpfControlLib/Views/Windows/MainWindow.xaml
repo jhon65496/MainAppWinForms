@@ -1,0 +1,46 @@
+﻿<Window x:Class="WpfControlLib.Views.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlLib.Views.Windows"
+        xmlns:m="clr-namespace:WpfControlLib.Models"
+        xmlns:vm="clr-namespace:WpfControlLib.ViewModels" 
+        xmlns:base="clr-namespace:WpfControlLib.ViewModels.Base"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        Title="{Binding Title}"         
+        Height="450" Width="220">
+    <Grid>        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" MinWidth="200"/>            
+        </Grid.ColumnDefinitions>
+        <!--Группы-->
+        <GroupBox Grid.Column="0" Header="Группы--ListBox">
+            <DockPanel>
+                <Button DockPanel.Dock="Bottom" Content="Тестовая кнопка" Margin="5"
+                        Command="{Binding TestCommand}"/>
+                <ListBox ItemsSource="{Binding Groups}" 
+                        SelectedItem="{Binding SelectedGroup}" 
+                        SelectedIndex="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" 
+                        Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="m:Group">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Right" 
+                              Text="{Binding Students.Count, StringFormat=({0})}"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </GroupBox>
+        
+    </Grid>
+</Window>
